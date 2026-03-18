@@ -6,7 +6,24 @@
 set -euo pipefail
 
 FLAKE_FILE="$(dirname "$0")/../flake.nix"
+README_FILE="$(dirname "$0")/../README.md"
 REPO_URL="https://download.max.ru/linux/deb"
+
+# Функция для обновления README.md
+update_readme() {
+    local VERSION="$1"
+    local DEB_FILE="$2"
+
+    # Извлекаем номер сборки из имени файла (MAX-26.8.0.51302.deb → 51302)
+    local BUILD_NUMBER=$(echo "$DEB_FILE" | sed -E 's/MAX-[0-9.]+\.([0-9]+)\.deb/\1/')
+
+    echo "📝 Обновление $README_FILE..."
+
+    # Обновляем строку с версией в разделе "Особенности сборки"
+    sed -i "s/- \*\*Версия:\*\* [0-9.]* (сборка [0-9]*)/- **Версия:** $VERSION (сборка $BUILD_NUMBER)/" "$README_FILE"
+
+    echo "✅ README.md обновлён"
+}
 
 # Функция для обновления flake.nix
 update_flake() {
@@ -98,6 +115,10 @@ update_flake() {
         echo "  debFile:  $CURRENT_DEB → $DEB_FILE"
         echo "  hash:     обновлён"
     fi
+
+    # Обновляем README.md
+    echo ""
+    update_readme "$VERSION" "$DEB_FILE"
 }
 
 # Функция для получения версии из репозитория (без apt)

@@ -20,7 +20,7 @@ update_readme() {
     echo "📝 Обновление $README_FILE..."
 
     # Обновляем строку с версией в разделе "Особенности сборки"
-    sed -i "s/- \*\*Версия:\*\* [0-9.]* (сборка [0-9]*)/- **Версия:** $VERSION (сборка $BUILD_NUMBER)/" "$README_FILE"
+    sed -i "s|- \*\*Версия:\*\* [0-9.]* (сборка [0-9]*)|- **Версия:** $VERSION (сборка $BUILD_NUMBER)|" "$README_FILE"
 
     echo "✅ README.md обновлён"
 }
@@ -99,9 +99,10 @@ update_flake() {
     # Обновляем flake.nix
     echo "📝 Обновление $FLAKE_FILE..."
 
-    sed -i "s/version = \"[^\"]*\";/version = \"$VERSION\";/" "$FLAKE_FILE"
-    sed -i "s/debFile = \"[^\"]*\";/debFile = \"$DEB_FILE\";/" "$FLAKE_FILE"
-    sed -i "s/srcHash = \"[^\"]*\";/srcHash = \"$HASH\";/" "$FLAKE_FILE"
+    # Используем | как разделитель вместо / чтобы избежать конфликтов с путями
+    sed -i "s|version = \"[^\"]*\";|version = \"$VERSION\";|" "$FLAKE_FILE"
+    sed -i "s|debFile = \"[^\"]*\";|debFile = \"$DEB_FILE\";|" "$FLAKE_FILE"
+    sed -i "s|srcHash = \"[^\"]*\";|srcHash = \"$HASH\";|" "$FLAKE_FILE"
 
     echo ""
     echo "✅ Готово!"

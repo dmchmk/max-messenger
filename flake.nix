@@ -36,7 +36,7 @@
           libxcb-util libxcb-wm
 
           # Graphics & Video
-          libGL mesa.drivers libdrm libva-minimal libvdpau libvpl
+          libGL mesa libdrm libva-minimal libvdpau libvpl
 
           # Wayland & Input
           wayland libxkbcommon

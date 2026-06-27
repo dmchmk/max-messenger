@@ -48,7 +48,7 @@
           glib fontconfig freetype dbus nspr nss pango cairo gdk-pixbuf
 
           # System libs
-          bzip2 expat libcap libconfig libgcrypt libgpg-error libpng libuuid
+          bzip2 expat libcap libgcrypt libgpg-error libpng libuuid
           libz lz4 xz zstd systemdLibs at-spi2-core
 
           # QT Modules
@@ -188,7 +188,7 @@
             wrapProgram $out/share/max/bin/max \
               --set QT_QPA_PLATFORM "wayland;xcb" \
               --set QT_PLUGIN_PATH "$out/share/max/plugins" \
-              --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath libs}:$out/share/max/lib64" \
+              --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath libs}:$out/share/max/lib64:$out/share/max/bin/max-service/lib64" \
               --prefix XDG_DATA_DIRS : "$out/share"
 
             # Сервис

@@ -36,7 +36,7 @@
           libxcb-util libxcb-wm
 
           # Graphics & Video
-          libglvnd mesa libdrm libva-minimal libvdpau libvpl
+          libGL mesa.drivers libdrm libva-minimal libvdpau libvpl
 
           # Wayland & Input
           wayland libxkbcommon
@@ -188,12 +188,13 @@
             wrapProgram $out/share/max/bin/max \
               --set QT_QPA_PLATFORM "wayland;xcb" \
               --set QT_PLUGIN_PATH "$out/share/max/plugins" \
+              --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath libs}:$out/share/max/lib64" \
               --prefix XDG_DATA_DIRS : "$out/share"
 
             # Сервис
             wrapProgram $out/share/max/bin/max-service/bin/max-service \
               --set QT_QPA_PLATFORM "wayland;xcb" \
-              --prefix LD_LIBRARY_PATH : "$out/share/max/bin/max-service/lib64:$out/share/max/lib64" \
+              --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath libs}:$out/share/max/bin/max-service/lib64:$out/share/max/lib64" \
               --set QT_PLUGIN_PATH "$out/share/max/plugins:$out/share/max/bin/max-service/plugins" \
               --prefix XDG_DATA_DIRS : "$out/share"
 

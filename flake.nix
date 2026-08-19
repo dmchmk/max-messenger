@@ -14,10 +14,10 @@
           config.allowUnfree = true; 
         };
 
-        version = "26.27.2";
-        debFile = "MAX-26.27.2.76730.deb";
+        version = "26.28.0";
+        debFile = "MAX-26.28.0.77135.deb";
         srcUrl = "https://download.max.ru/linux/deb/pool/main/m/max/${debFile}";
-        srcHash = "sha256-piqlNJfUOzBosMUM5ZJQRkvFkbGSZ3PESo6SlCifF14=";
+        srcHash = "sha256-RIVuSbWANoWWmZUJJwVMHQ0Jvrze/7roy5dCm1mre+s=";
 
         libs = with pkgs; [
           # X11 Core

@@ -192,9 +192,8 @@
             wrapProgram $out/share/max/bin/max \
               --set QT_QPA_PLATFORM "wayland;xcb" \
               --set LIBGL_DRIVERS_PATH "${pkgs.mesa}/lib/dri" \
-              --set QSG_RHI_BACKEND "opengl" \
+              --set QSG_RHI_BACKEND "vulkan" \
               --set QT_XCB_GL_INTEGRATION "egl" \
-              --set QTWEBENGINE_CHROMIUM_FLAGS "--disable-gpu --disable-gpu-compositing" \
               --set QT_PLUGIN_PATH "$out/share/max/plugins" \
               --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath libs}:$out/share/max/lib64:$out/share/max/bin/max-service/lib64" \
               --prefix XDG_DATA_DIRS : "${pkgs.mesa}/share:$out/share"
